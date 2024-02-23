@@ -10,3 +10,4 @@
 # Programming
 
 - 15 point: cf. js file
+- 75 points: after pressing the submit button enough times, a debug message with a random seed appears, we can then regenerate the OTP using python `random.randint()` function
