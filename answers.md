@@ -13,3 +13,9 @@
 - 75 points: after pressing the submit button enough times, a debug message with a random seed appears, we can then regenerate the OTP using python `random.randint()` function
 - 150 points: cf. js file
 - 250 points: cf. js file
+
+
+# Networking
+
+- 15 points: no need for wireshark, the password is written somewhere without encryption, so just `strings http-auth.cap | grep 'pass'`
+- 30 points: use `aircrack-ng` with `rockyou.txt` word list: password found in a few seconds
