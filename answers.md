@@ -19,3 +19,13 @@
 
 - 15 points: no need for wireshark, the password is written somewhere without encryption, so just `strings http-auth.cap | grep 'pass'`
 - 30 points: use `aircrack-ng` with `rockyou.txt` word list: password found in a few seconds
+
+
+# Reverse Engineering
+
+- 25 points:
+    By using `strings`, we can find "%11s" right after "Enter the password:" as in a scanf call, so it seems that the password is 11 characters long.
+    However, no obvious 11 chars password appears when using `strings`.
+    As the binary is statically linked, we can't use `ltrace`.
+    So I used `gdb`: when stepping in the main function, we can find the `scanf` call and the password loading before calling a `strncmp`-type function.
+    We can then get its address and print it.
