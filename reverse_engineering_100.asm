@@ -1,0 +1,507 @@
+0x000000004017b5 <getFlag>:
+  0x4017b5:		endbr64
+  0x4017b9:		push   %rbp
+  0x4017ba:		mov    %rsp,%rbp
+  0x4017bd:		sub    $0x10,%rsp
+  0x4017c1:		mov    $0x0,%eax
+  0x4017c6:		call   0x401d06 <getMac>
+  0x4017cb:		mov    %rax,-0x10(%rbp)
+
+# Check if getMac didn't return a 0
+  0x4017cf:		cmpq   $0x0,-0x10(%rbp)
+  0x4017d4:		jne    0x4017e0 <getFlag+0x2b>
+    0x4017d6:		mov    $0x0,%eax
+    0x4017db:		jmp    0x40186e <getFlag+0xb9>
+
+  0x4017e0:		mov    -0x10(%rbp),%rax
+  0x4017e4:		lea    0x99fc6(%rip),%rdx        # 0x49b7b1 <FLAG+0x11>
+  0x4017eb:		mov    %rdx,%rsi
+  0x4017ee:		mov    %rax,%rdi
+  0x4017f1:		call   0x401140 <_init+0x140>    # strcmp
+  0x4017f6:		test   %eax,%eax
+  0x4017f8:		jne    0x401814 <getFlag+0x5f>
+    0x4017fa:		movzbl 0xca1f5(%rip),%eax        # 0x4cb9f6 <user_seed>
+    0x401801:		test   %al,%al
+    0x401803:		je     0x401814 <getFlag+0x5f>
+    0x401805:		lea    0x99fb7(%rip),%rax        # 0x49b7c3 <FLAG+0x23>
+    0x40180c:		mov    %rax,%rdi
+    0x40180f:		call   0x4144a0 <_IO_puts>
+
+  0x401814:		mov    -0x10(%rbp),%rax
+  0x401818:		mov    %rax,%rsi
+  0x40181b:		lea    0x99faa(%rip),%rax        # 0x49b7cc <FLAG+0x2c>
+  0x401822:		mov    %rax,%rdi
+  0x401825:		mov    $0x0,%eax
+  0x40182a:		call   0x406470 <_IO_printf>
+  0x40182f:		mov    -0x10(%rbp),%rax
+  0x401833:		mov    %rax,%rdi
+  0x401836:		call   0x401190 <_init+0x190>
+  0x40183b:		mov    %eax,%edx
+  0x40183d:		mov    -0x10(%rbp),%rax
+  0x401841:		mov    %edx,%ecx
+  0x401843:		mov    %rax,%rdx
+  0x401846:		mov    $0x11,%esi
+  0x40184b:		lea    0x99f4e(%rip),%rax        # 0x49b7a0 <FLAG>
+  0x401852:		mov    %rax,%rdi
+  0x401855:		call   0x401c7f <xorencrypt>
+  0x40185a:		mov    %rax,-0x8(%rbp)
+  0x40185e:		mov    -0x10(%rbp),%rax
+  0x401862:		mov    %rax,%rdi
+  0x401865:		call   0x420ca0 <__free>
+  0x40186a:		mov    -0x8(%rbp),%rax
+  0x40186e:		leave
+  0x40186f:		ret
+
+0x00000000401870 <generateSentence>:
+  0x401870:		endbr64
+  0x401874:		push   %rbp
+  0x401875:		mov    %rsp,%rbp
+  0x401878:		sub    $0x10,%rsp
+  0x40187c:		mov    $0x1,%esi
+  0x401881:		mov    $0xc9,%edi
+  0x401886:		call   0x421df0 <__calloc>
+  0x40188b:		mov    %rax,-0x10(%rbp)
+  0x40188f:		call   0x4051b0 <rand>
+  0x401894:		mov    $0x6,%ecx
+  0x401899:		cltd
+  0x40189a:		idiv   %ecx
+  0x40189c:		mov    %edx,%eax
+  0x40189e:		cltq
+  0x4018a0:		lea    0x0(,%rax,8),%rdx
+  0x4018a8:		lea    0xc8051(%rip),%rax        # 0x4c9900 <ARTICLES>
+  0x4018af:		mov    (%rdx,%rax,1),%rdx
+  0x4018b3:		mov    -0x10(%rbp),%rax
+  0x4018b7:		mov    %rdx,%rsi
+  0x4018ba:		mov    %rax,%rdi
+  0x4018bd:		call   0x401090 <_init+0x90>
+  0x4018c2:		mov    -0x10(%rbp),%rax
+  0x4018c6:		mov    %rax,%rdi
+  0x4018c9:		call   0x401190 <_init+0x190>
+  0x4018ce:		mov    %rax,%rdx
+  0x4018d1:		mov    -0x10(%rbp),%rax
+  0x4018d5:		add    %rdx,%rax
+  0x4018d8:		movw   $0x20,(%rax)
+  0x4018dd:		call   0x4051b0 <rand>
+  0x4018e2:		mov    $0x65,%ecx
+  0x4018e7:		cltd
+  0x4018e8:		idiv   %ecx
+  0x4018ea:		mov    %edx,%eax
+  0x4018ec:		cltq
+  0x4018ee:		lea    0x0(,%rax,8),%rdx
+  0x4018f6:		lea    0xc7803(%rip),%rax        # 0x4c9100 <NOUNS>
+  0x4018fd:		mov    (%rdx,%rax,1),%rdx
+  0x401901:		mov    -0x10(%rbp),%rax
+  0x401905:		mov    %rdx,%rsi
+  0x401908:		mov    %rax,%rdi
+  0x40190b:		call   0x401090 <_init+0x90>
+  0x401910:		mov    -0x10(%rbp),%rax
+  0x401914:		mov    %rax,%rdi
+  0x401917:		call   0x401190 <_init+0x190>
+  0x40191c:		mov    %rax,%rdx
+  0x40191f:		mov    -0x10(%rbp),%rax
+  0x401923:		add    %rdx,%rax
+  0x401926:		movw   $0x20,(%rax)
+  0x40192b:		call   0x4051b0 <rand>
+  0x401930:		mov    $0x65,%ecx
+  0x401935:		cltd
+  0x401936:		idiv   %ecx
+  0x401938:		mov    %edx,%eax
+  0x40193a:		cltq
+  0x40193c:		lea    0x0(,%rax,8),%rdx
+  0x401944:		lea    0xc7c75(%rip),%rax        # 0x4c95c0 <VERBS>
+  0x40194b:		mov    (%rdx,%rax,1),%rdx
+  0x40194f:		mov    -0x10(%rbp),%rax
+  0x401953:		mov    %rdx,%rsi
+  0x401956:		mov    %rax,%rdi
+  0x401959:		call   0x401090 <_init+0x90>
+  0x40195e:		mov    -0x10(%rbp),%rax
+  0x401962:		lea    0x99e74(%rip),%rdx        # 0x49b7dd <FLAG+0x3d>
+  0x401969:		mov    %rdx,%rsi
+  0x40196c:		mov    %rax,%rdi
+  0x40196f:		call   0x401140 <_init+0x140>    # strcmp
+  0x401974:		test   %eax,%eax
+  0x401976:		jne    0x401a24 <generateSentence+0x1b4>
+  0x40197c:		movzbl 0xca072(%rip),%eax        # 0x4cb9f5 <search>
+  0x401983:		test   %al,%al
+  0x401985:		jne    0x401996 <generateSentence+0x126>
+  0x401987:		movzbl 0xca068(%rip),%eax        # 0x4cb9f6 <user_seed>
+  0x40198e:		test   %al,%al
+  0x401990:		je     0x401a24 <generateSentence+0x1b4>
+  0x401996:		mov    -0x10(%rbp),%rax
+  0x40199a:		mov    %rax,%rdi
+  0x40199d:		call   0x401190 <_init+0x190>
+  0x4019a2:		mov    %rax,%rdx
+  0x4019a5:		mov    -0x10(%rbp),%rax
+  0x4019a9:		add    %rdx,%rax
+  0x4019ac:		movw   $0x20,(%rax)
+  0x4019b1:		mov    $0x0,%eax
+  0x4019b6:		call   0x4017b5 <getFlag>
+  0x4019bb:		mov    %rax,-0x8(%rbp)
+  0x4019bf:		cmpq   $0x0,-0x8(%rbp)
+  0x4019c4:		jne    0x4019f9 <generateSentence+0x189>
+  0x4019c6:		mov    -0x10(%rbp),%rax
+  0x4019ca:		mov    %rax,%rdi
+  0x4019cd:		call   0x401190 <_init+0x190>
+  0x4019d2:		mov    %rax,%rdx
+  0x4019d5:		mov    -0x10(%rbp),%rax
+  0x4019d9:		add    %rdx,%rax
+  0x4019dc:		movabs $0x2065687420746f6e,%rsi
+  0x4019e6:		mov    %rsi,(%rax)
+  0x4019e9:		movabs $0x67616c66206568,%rcx
+  0x4019f3:		mov    %rcx,0x5(%rax)
+  0x4019f7:		jmp    0x401a18 <generateSentence+0x1a8>
+  0x4019f9:		mov    -0x8(%rbp),%rdx
+  0x4019fd:		mov    -0x10(%rbp),%rax
+  0x401a01:		mov    %rdx,%rsi
+  0x401a04:		mov    %rax,%rdi
+  0x401a07:		call   0x401090 <_init+0x90>
+  0x401a0c:		mov    -0x8(%rbp),%rax
+  0x401a10:		mov    %rax,%rdi
+  0x401a13:		call   0x420ca0 <__free>
+  0x401a18:		movb   $0x1,0xc9fd5(%rip)        # 0x4cb9f4 <found>
+  0x401a1f:		jmp    0x401ac0 <generateSentence+0x250>
+  0x401a24:		mov    -0x10(%rbp),%rax
+  0x401a28:		mov    %rax,%rdi
+  0x401a2b:		call   0x401190 <_init+0x190>
+  0x401a30:		mov    %rax,%rdx
+  0x401a33:		mov    -0x10(%rbp),%rax
+  0x401a37:		add    %rdx,%rax
+  0x401a3a:		movw   $0x20,(%rax)
+  0x401a3f:		call   0x4051b0 <rand>
+  0x401a44:		mov    $0x7,%ecx
+  0x401a49:		cltd
+  0x401a4a:		idiv   %ecx
+  0x401a4c:		mov    %edx,%eax
+  0x401a4e:		cltq
+  0x401a50:		lea    0x0(,%rax,8),%rdx
+  0x401a58:		lea    0xc7ee1(%rip),%rax        # 0x4c9940 <PREPOSITIONS>
+  0x401a5f:		mov    (%rdx,%rax,1),%rdx
+  0x401a63:		mov    -0x10(%rbp),%rax
+  0x401a67:		mov    %rdx,%rsi
+  0x401a6a:		mov    %rax,%rdi
+  0x401a6d:		call   0x401090 <_init+0x90>
+  0x401a72:		mov    -0x10(%rbp),%rax
+  0x401a76:		mov    %rax,%rdi
+  0x401a79:		call   0x401190 <_init+0x190>
+  0x401a7e:		mov    %rax,%rdx
+  0x401a81:		mov    -0x10(%rbp),%rax
+  0x401a85:		add    %rdx,%rax
+  0x401a88:		movw   $0x20,(%rax)
+  0x401a8d:		call   0x4051b0 <rand>
+  0x401a92:		mov    $0x2d,%ecx
+  0x401a97:		cltd
+  0x401a98:		idiv   %ecx
+  0x401a9a:		mov    %edx,%eax
+  0x401a9c:		cltq
+  0x401a9e:		lea    0x0(,%rax,8),%rdx
+  0x401aa6:		lea    0xc7993(%rip),%rax        # 0x4c9440 <PROPER_NOUNS>
+  0x401aad:		mov    (%rdx,%rax,1),%rdx
+  0x401ab1:		mov    -0x10(%rbp),%rax
+  0x401ab5:		mov    %rdx,%rsi
+  0x401ab8:		mov    %rax,%rdi
+  0x401abb:		call   0x401090 <_init+0x90>
+  0x401ac0:		mov    -0x10(%rbp),%rax
+  0x401ac4:		movzbl (%rax),%eax
+  0x401ac7:		movsbl %al,%eax
+  0x401aca:		mov    %eax,%edi
+  0x401acc:		call   0x404ad0 <toupper>
+  0x401ad1:		mov    %eax,%edx
+  0x401ad3:		mov    -0x10(%rbp),%rax
+  0x401ad7:		mov    %dl,(%rax)
+  0x401ad9:		mov    -0x10(%rbp),%rax
+  0x401add:		leave
+  0x401ade:		ret
+
+0x00000000401adf <main>:
+  0x401adf:		endbr64
+  0x401ae3:		push   %rbp
+  0x401ae4:		mov    %rsp,%rbp
+  0x401ae7:		sub    $0x20,%rsp
+  0x401aeb:		mov    %edi,-0x14(%rbp)
+  0x401aee:		mov    %rsi,-0x20(%rbp)
+  0x401af2:		mov    $0x0,%edi
+  0x401af7:		call   0x430c90 <time>
+  0x401afc:		mov    %eax,0xc9eee(%rip)        # 0x4cb9f0 <SEED>
+  0x401b02:		cmpl   $0x1,-0x14(%rbp)
+  0x401b06:		jle    0x401c3f <main+0x160>
+  0x401b0c:		mov    -0x20(%rbp),%rax
+  0x401b10:		add    $0x8,%rax
+  0x401b14:		mov    (%rax),%rax
+  0x401b17:		lea    0x99ccb(%rip),%rdx        # 0x49b7e9 <FLAG+0x49> == "--set-seed"
+  0x401b1e:		mov    %rdx,%rsi
+  0x401b21:		mov    %rax,%rdi
+  0x401b24:		call   0x401140 <_init+0x140>    # strcmp
+  0x401b29:		test   %eax,%eax
+  0x401b2b:		jne    0x401b55 <main+0x76>
+  0x401b2d:		cmpl   $0x2,-0x14(%rbp)
+  0x401b31:		jle    0x401b55 <main+0x76>
+  0x401b33:		movb   $0x1,0xc9ebc(%rip)        # 0x4cb9f6 <user_seed>
+  0x401b3a:		mov    -0x20(%rbp),%rax
+  0x401b3e:		add    $0x10,%rax
+  0x401b42:		mov    (%rax),%rax
+  0x401b45:		mov    %rax,%rdi
+  0x401b48:		call   0x404bd0 <atoi>
+  0x401b4d:		mov    %eax,0xc9e9d(%rip)        # 0x4cb9f0 <SEED>
+  0x401b53:		jmp    0x401b9a <main+0xbb>
+  0x401b55:		mov    -0x20(%rbp),%rax
+  0x401b59:		add    $0x8,%rax
+  0x401b5d:		mov    (%rax),%rax
+  0x401b60:		lea    0x99c8d(%rip),%rdx        # 0x49b7f4 <FLAG+0x54>
+  0x401b67:		mov    %rdx,%rsi
+  0x401b6a:		mov    %rax,%rdi
+  0x401b6d:		call   0x401140 <_init+0x140>    # strcmp
+  0x401b72:		test   %eax,%eax
+  0x401b74:		jne    0x401c3f <main+0x160>
+  0x401b7a:		lea    0x99c7b(%rip),%rax        # 0x49b7fc <FLAG+0x5c>
+  0x401b81:		mov    %rax,%rdi
+  0x401b84:		call   0x4144a0 <_IO_puts>
+  0x401b89:		movb   $0x1,0xc9e65(%rip)        # 0x4cb9f5 <search>
+  0x401b90:		movl   $0x0,0xc9e56(%rip)        # 0x4cb9f0 <SEED>
+  0x401b9a:		jmp    0x401c3f <main+0x160>
+  0x401b9f:		mov    0xc9e4b(%rip),%eax        # 0x4cb9f0 <SEED>
+  0x401ba5:		mov    %eax,%edi
+  0x401ba7:		call   0x4051d0 <__srandom>
+  0x401bac:		mov    $0x0,%eax
+  0x401bb1:		call   0x401870 <generateSentence>
+  0x401bb6:		mov    %rax,-0x8(%rbp)
+  0x401bba:		movzbl 0xc9e33(%rip),%eax        # 0x4cb9f4 <found>
+  0x401bc1:		test   %al,%al
+  0x401bc3:		je     0x401bf9 <main+0x11a>
+  0x401bc5:		movzbl 0xc9e2a(%rip),%eax        # 0x4cb9f6 <user_seed>
+  0x401bcc:		test   %al,%al
+  0x401bce:		je     0x401beb <main+0x10c>
+  0x401bd0:		mov    -0x8(%rbp),%rax
+  0x401bd4:		mov    %rax,%rsi
+  0x401bd7:		lea    0x99c2b(%rip),%rax        # 0x49b809 <FLAG+0x69>
+  0x401bde:		mov    %rax,%rdi
+  0x401be1:		mov    $0x0,%eax
+  0x401be6:		call   0x406470 <_IO_printf>
+  0x401beb:		mov    -0x8(%rbp),%rax
+  0x401bef:		mov    %rax,%rdi
+  0x401bf2:		call   0x420ca0 <__free>
+  0x401bf7:		jmp    0x401c51 <main+0x172>
+  0x401bf9:		movzbl 0xc9df5(%rip),%eax        # 0x4cb9f5 <search>
+  0x401c00:		xor    $0x1,%eax
+  0x401c03:		test   %al,%al
+  0x401c05:		je     0x401c30 <main+0x151>
+  0x401c07:		mov    -0x8(%rbp),%rax
+  0x401c0b:		mov    %rax,%rsi
+  0x401c0e:		lea    0x99bf4(%rip),%rax        # 0x49b809 <FLAG+0x69>
+  0x401c15:		mov    %rax,%rdi
+  0x401c18:		mov    $0x0,%eax
+  0x401c1d:		call   0x406470 <_IO_printf>
+  0x401c22:		mov    -0x8(%rbp),%rax
+  0x401c26:		mov    %rax,%rdi
+  0x401c29:		call   0x420ca0 <__free>
+  0x401c2e:		jmp    0x401c51 <main+0x172>
+  0x401c30:		mov    0xc9dba(%rip),%eax        # 0x4cb9f0 <SEED>
+  0x401c36:		add    $0x1,%eax
+  0x401c39:		mov    %eax,0xc9db1(%rip)        # 0x4cb9f0 <SEED>
+  0x401c3f:		movzbl 0xc9dae(%rip),%eax        # 0x4cb9f4 <found>
+  0x401c46:		xor    $0x1,%eax
+  0x401c49:		test   %al,%al
+  0x401c4b:		jne    0x401b9f <main+0xc0>
+  0x401c51:		movzbl 0xc9d9d(%rip),%eax        # 0x4cb9f5 <search>
+  0x401c58:		test   %al,%al
+  0x401c5a:		je     0x401c78 <main+0x199>
+  0x401c5c:		mov    0xc9d8e(%rip),%eax        # 0x4cb9f0 <SEED>
+  0x401c62:		mov    %eax,%esi
+  0x401c64:		lea    0x99ba3(%rip),%rax        # 0x49b80e <FLAG+0x6e>
+  0x401c6b:		mov    %rax,%rdi
+  0x401c6e:		mov    $0x0,%eax
+  0x401c73:		call   0x406470 <_IO_printf>
+  0x401c78:		mov    $0x0,%eax
+  0x401c7d:		leave
+  0x401c7e:		ret
+
+0x00000000401c7f <xorencrypt>:
+  0x401c7f:		endbr64
+  0x401c83:		push   %rbp
+  0x401c84:		mov    %rsp,%rbp
+  0x401c87:		sub    $0x30,%rsp
+  0x401c8b:		mov    %rdi,-0x18(%rbp)
+  0x401c8f:		mov    %esi,-0x1c(%rbp)
+  0x401c92:		mov    %rdx,-0x28(%rbp)
+  0x401c96:		mov    %ecx,-0x20(%rbp)
+  0x401c99:		mov    -0x1c(%rbp),%eax
+  0x401c9c:		add    $0x1,%eax
+  0x401c9f:		cltq
+  0x401ca1:		mov    $0x1,%esi
+  0x401ca6:		mov    %rax,%rdi
+  0x401ca9:		call   0x421df0 <__calloc>
+  0x401cae:		mov    %rax,-0x8(%rbp)
+  0x401cb2:		movl   $0x0,-0xc(%rbp)
+  0x401cb9:		jmp    0x401cf8 <xorencrypt+0x79>
+  0x401cbb:		mov    -0xc(%rbp),%eax
+  0x401cbe:		movslq %eax,%rdx
+  0x401cc1:		mov    -0x18(%rbp),%rax
+  0x401cc5:		add    %rdx,%rax
+  0x401cc8:		movzbl (%rax),%esi
+  0x401ccb:		mov    -0xc(%rbp),%eax
+  0x401cce:		cltd
+  0x401ccf:		idivl  -0x20(%rbp)
+  0x401cd2:		mov    %edx,%eax
+  0x401cd4:		movslq %eax,%rdx
+  0x401cd7:		mov    -0x28(%rbp),%rax
+  0x401cdb:		add    %rdx,%rax
+  0x401cde:		movzbl (%rax),%ecx
+  0x401ce1:		mov    -0xc(%rbp),%eax
+  0x401ce4:		movslq %eax,%rdx
+  0x401ce7:		mov    -0x8(%rbp),%rax
+  0x401ceb:		add    %rdx,%rax
+  0x401cee:		xor    %ecx,%esi
+  0x401cf0:		mov    %esi,%edx
+  0x401cf2:		mov    %dl,(%rax)
+  0x401cf4:		addl   $0x1,-0xc(%rbp)
+  0x401cf8:		mov    -0xc(%rbp),%eax
+  0x401cfb:		cmp    -0x1c(%rbp),%eax
+  0x401cfe:		jl     0x401cbb <xorencrypt+0x3c>
+  0x401d00:		mov    -0x8(%rbp),%rax
+  0x401d04:		leave
+  0x401d05:		ret
+
+0x00000000401d06 <getMac>:
+  0x401d06:	f3 0f 1e fa          	endbr64
+  0x401d0a:		push   %rbp
+  0x401d0b:		mov    %rsp,%rbp
+  0x401d0e:		push   %rbx
+  0x401d0f:		sub    $0x48,%rsp
+  0x401d13:		movq   $0x0,-0x40(%rbp)
+  0x401d1b:		movq   $0x0,-0x38(%rbp)
+  0x401d23:		mov    0xc7c4e(%rip),%rax        # 0x4c9978 <dir_search>
+  0x401d2a:		mov    %rax,%rdi
+  0x401d2d:		call   0x430e70 <__opendir>
+  0x401d32:		mov    %rax,-0x30(%rbp)
+  0x401d36:		cmpq   $0x0,-0x30(%rbp)
+  0x401d3b:		jne    0x401dbb <getMac+0xb5>
+  0x401d3d:		mov    0xc7c34(%rip),%rax        # 0x4c9978 <dir_search>
+  0x401d44:		mov    %rax,%rsi
+  0x401d47:		lea    0x99ae1(%rip),%rax        # 0x49b82f <FLAG+0x8f>
+  0x401d4e:		mov    %rax,%rdi
+  0x401d51:		mov    $0x0,%eax
+  0x401d56:		call   0x406470 <_IO_printf>
+  0x401d5b:		mov    $0x0,%eax
+  0x401d60:		jmp    0x401f3c <getMac+0x236>
+  0x401d65:		mov    -0x38(%rbp),%rax
+  0x401d69:		add    $0x13,%rax
+  0x401d6d:		lea    0x99ad7(%rip),%rdx        # 0x49b84b <FLAG+0xab>
+  0x401d74:		mov    %rdx,%rsi
+  0x401d77:		mov    %rax,%rdi
+  0x401d7a:		call   0x401140 <_init+0x140>    # strcmp
+  0x401d7f:		test   %eax,%eax
+  0x401d81:		je     0x401db7 <getMac+0xb1>
+  0x401d83:		mov    -0x38(%rbp),%rax
+  0x401d87:		add    $0x13,%rax
+  0x401d8b:		lea    0x99abb(%rip),%rdx        # 0x49b84d <FLAG+0xad>
+  0x401d92:		mov    %rdx,%rsi
+  0x401d95:		mov    %rax,%rdi
+  0x401d98:		call   0x401140 <_init+0x140>    # strcmp
+  0x401d9d:		test   %eax,%eax
+  0x401d9f:		je     0x401dba <getMac+0xb4>
+  0x401da1:		mov    -0x38(%rbp),%rax
+  0x401da5:		add    $0x13,%rax
+  0x401da9:		mov    %rax,%rdi
+  0x401dac:		call   0x4234a0 <__strdup>
+  0x401db1:		mov    %rax,-0x40(%rbp)
+  0x401db5:		jmp    0x401dd2 <getMac+0xcc>
+  0x401db7:		nop
+  0x401db8:		jmp    0x401dbb <getMac+0xb5>
+  0x401dba:		nop
+  0x401dbb:		mov    -0x30(%rbp),%rax
+  0x401dbf:		mov    %rax,%rdi
+  0x401dc2:		call   0x431080 <__readdir>
+  0x401dc7:		mov    %rax,-0x38(%rbp)
+  0x401dcb:		cmpq   $0x0,-0x38(%rbp)
+  0x401dd0:		jne    0x401d65 <getMac+0x5f>
+  0x401dd2:		mov    -0x30(%rbp),%rax
+  0x401dd6:		mov    %rax,%rdi
+  0x401dd9:		call   0x431050 <__closedir>
+  0x401dde:		cmpq   $0x0,-0x40(%rbp)
+  0x401de3:		je     0x401f19 <getMac+0x213>
+  0x401de9:		mov    0xc7b88(%rip),%rax        # 0x4c9978 <dir_search>
+  0x401df0:		mov    %rax,%rdi
+  0x401df3:		call   0x401190 <_init+0x190>
+  0x401df8:		mov    %eax,%ebx
+  0x401dfa:		mov    -0x40(%rbp),%rax
+  0x401dfe:		mov    %rax,%rdi
+  0x401e01:		call   0x401190 <_init+0x190>
+  0x401e06:		add    %eax,%ebx
+  0x401e08:		mov    0xc7b71(%rip),%rax        # 0x4c9980 <file>
+  0x401e0f:		mov    %rax,%rdi
+  0x401e12:		call   0x401190 <_init+0x190>
+  0x401e17:		add    %ebx,%eax
+  0x401e19:		add    $0x3,%eax
+  0x401e1c:		mov    %eax,-0x44(%rbp)
+  0x401e1f:		mov    -0x44(%rbp),%eax
+  0x401e22:		cltq
+  0x401e24:		mov    $0x1,%esi
+  0x401e29:		mov    %rax,%rdi
+  0x401e2c:		call   0x421df0 <__calloc>
+  0x401e31:		mov    %rax,-0x28(%rbp)
+  0x401e35:		mov    0xc7b44(%rip),%rdi        # 0x4c9980 <file>
+  0x401e3c:		mov    0xc7b35(%rip),%rdx        # 0x4c9978 <dir_search>
+  0x401e43:		mov    -0x44(%rbp),%eax
+  0x401e46:		movslq %eax,%rsi
+  0x401e49:		mov    -0x40(%rbp),%rcx
+  0x401e4d:		mov    -0x28(%rbp),%rax
+  0x401e51:		mov    %rdi,%r9
+  0x401e54:		mov    %rcx,%r8
+  0x401e57:		mov    %rdx,%rcx
+  0x401e5a:		lea    0x999ef(%rip),%rdx        # 0x49b850 <FLAG+0xb0>
+  0x401e61:		mov    %rax,%rdi
+  0x401e64:		mov    $0x0,%eax
+  0x401e69:		call   0x406540 <__snprintf>
+  0x401e6e:		mov    -0x40(%rbp),%rax
+  0x401e72:		mov    %rax,%rdi
+  0x401e75:		call   0x420ca0 <__free>
+  0x401e7a:		mov    -0x28(%rbp),%rax
+  0x401e7e:		lea    0x999d4(%rip),%rdx        # 0x49b859 <FLAG+0xb9>
+  0x401e85:		mov    %rdx,%rsi
+  0x401e88:		mov    %rax,%rdi
+  0x401e8b:		call   0x4143b0 <_IO_new_fopen>
+  0x401e90:		mov    %rax,-0x20(%rbp)
+  0x401e94:		cmpq   $0x0,-0x20(%rbp)
+  0x401e99:		jne    0x401ec9 <getMac+0x1c3>
+  0x401e9b:		mov    -0x28(%rbp),%rax
+  0x401e9f:		mov    %rax,%rsi
+  0x401ea2:		lea    0x999b2(%rip),%rax        # 0x49b85b <FLAG+0xbb>
+  0x401ea9:		mov    %rax,%rdi
+  0x401eac:		mov    $0x0,%eax
+  0x401eb1:		call   0x406470 <_IO_printf>
+  0x401eb6:		mov    -0x28(%rbp),%rax
+  0x401eba:		mov    %rax,%rdi
+  0x401ebd:		call   0x420ca0 <__free>
+  0x401ec2:		mov    $0x0,%eax
+  0x401ec7:		jmp    0x401f3c <getMac+0x236>
+  0x401ec9:		mov    $0x1,%esi
+  0x401ece:		mov    $0x50,%edi
+  0x401ed3:		call   0x421df0 <__calloc>
+  0x401ed8:		mov    %rax,-0x18(%rbp)
+  0x401edc:		mov    -0x18(%rbp),%rdx
+  0x401ee0:		mov    -0x20(%rbp),%rax
+  0x401ee4:		lea    0x99987(%rip),%rcx        # 0x49b872 <FLAG+0xd2>
+  0x401eeb:		mov    %rcx,%rsi
+  0x401eee:		mov    %rax,%rdi
+  0x401ef1:		mov    $0x0,%eax
+  0x401ef6:		call   0x4063b0 <__isoc99_fscanf>
+  0x401efb:		mov    -0x20(%rbp),%rax
+  0x401eff:		mov    %rax,%rdi
+  0x401f02:		call   0x414010 <_IO_new_fclose>
+  0x401f07:		mov    -0x28(%rbp),%rax
+  0x401f0b:		mov    %rax,%rdi
+  0x401f0e:		call   0x420ca0 <__free>
+  0x401f13:		mov    -0x18(%rbp),%rax
+  0x401f17:		jmp    0x401f3c <getMac+0x236>
+  0x401f19:		mov    0xc7a58(%rip),%rax        # 0x4c9978 <dir_search>
+  0x401f20:		mov    %rax,%rsi
+  0x401f23:		lea    0x9994e(%rip),%rax        # 0x49b878 <FLAG+0xd8>
+  0x401f2a:		mov    %rax,%rdi
+  0x401f2d:		mov    $0x0,%eax
+  0x401f32:		call   0x406470 <_IO_printf>
+  0x401f37:		mov    $0x0,%eax
+  0x401f3c:		mov    -0x8(%rbp),%rbx
+  0x401f40:		leave
+  0x401f41:		ret
+  0x401f42:		cs nopw 0x0(%rax,%rax,1)
+  0x401f4c:		nopl   0x0(%rax)
+

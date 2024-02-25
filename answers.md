@@ -37,3 +37,9 @@
     `gcc -o main reverse_engineering_50.c command-transmitter.so -Wl,rpath=$(pwd)` (i.e. we add curr directory to the linker run-time search path)
     We can now execute `./main` in gcc and step into the `command_transmitter` function, the disassembly is in `reverse_engineering_50.asm` and notes are
     in `reverse_engineering_50.md`.
+
+- 100 points:
+    The executable seems to generate random sentences finishing with the name of a US President. `strings` reveals that the executable can take a `--debug` flag
+    that makes it print the MAC address of the computer and the seed of the RNG, and a `--set-seed` flag to set this seed.
+    In the disassembly, we can find a `getFlag` function that checks that the MAC address of the computer is `de:ad:be:ef:fa:ce`.
+    Setting the MAC address to this and checking the output of the `getFlag` function then gives us the flag.
