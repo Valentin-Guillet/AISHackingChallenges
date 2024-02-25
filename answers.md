@@ -35,5 +35,5 @@
     Then, `nm -D command-transmitter.so` allows us to see that it defines a function called `command_transmitter`.
     We can create a C file that calls that function (cf. `reverse_engineering_50.c`) that we compile with debug symbols and we give it the path to the shared library:
     `gcc -o main reverse_engineering_50.c command-transmitter.so -Wl,rpath=$(pwd)` (i.e. we add curr directory to the linker run-time search path)
-    We can now execute `./main` in gcc and step into the `command_transmitter` function, the disassembly is in `command_transmitter_disassembly.asm` and notes are
-    in `command_transmitter_disassembly.md`.
+    We can now execute `./main` in gcc and step into the `command_transmitter` function, the disassembly is in `reverse_engineering_50.asm` and notes are
+    in `reverse_engineering_50.md`.
