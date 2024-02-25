@@ -43,3 +43,15 @@
     that makes it print the MAC address of the computer and the seed of the RNG, and a `--set-seed` flag to set this seed.
     In the disassembly, we can find a `getFlag` function that checks that the MAC address of the computer is `de:ad:be:ef:fa:ce`.
     Setting the MAC address to this and checking the output of the `getFlag` function then gives us the flag.
+
+- 250 points:
+    The executable has a function that checks if it is run in a debugger and crash, but we can set the value of the result of the comparison and avoid this.
+    By reading the disassembly of the `phase_unlock` function, we can find the password of the 1st phase in memory.
+    Then, reading the `phase_disarm` function reveals that the timer must be stopped using a STP signal (i.e. `C-z`).
+    Then the next password is a number sequence that is read using `scanf("%d %d %d %d %d %d %d")`.
+    The answer sequence called `wire_cut_sequence` can be found in memory (cf. `reverse_engineering_250.asm`) but is not the direct answer,
+    we must find the sequence that "sorts" the given wire cut sequence, i.e. the indices of increasing numbers in the wire cut sequence.
+    Then, reading the `phase_reverse` function reveals also a `scanf("%d %d %d")` input, and the check is simply that the sum of the three chars must be 0xffffffff.
+    Finally, reading the `phase_disposal` function reveals that we can control the value of the check_light and disposal_mode variables using a simple form of
+    buffer overflow. In order to defuse the bomb, the input is compared to a password in memory, and the check_light and disposal_mode variables are also checked.
+    Once everything is set, this gives the complete password.
