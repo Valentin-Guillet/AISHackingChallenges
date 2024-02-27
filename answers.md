@@ -63,3 +63,8 @@
     the first call and enter of the second, and we break when it exits).
     At this point, we just read user input. By carefully stepping in the assembly afterwards, we can find some classic functions call.
     In particular, we can find a function that seems to be `atoi` or equivalent as its outputs the integer value of our input in `%eax`.
+
+
+# Steganography
+
+- 25 points: the audio is composed of 11 notes lasting 1 second each, and their frequency (=nb or periods) give an ASCII code
