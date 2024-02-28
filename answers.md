@@ -76,3 +76,8 @@
     However, by looking at the hex dump of this file and the BMP header format, we can see that the header is twice as long as normal, and there's a "FAKE"
     string in a reserved spot.
     By removing this fake header, we get a new BMP file with a correct header that gives us the flag when seen.
+
+
+# Cryptography
+
+- 25 points: a simple skip cipher (take one letter every n letters)
