@@ -68,3 +68,11 @@
 # Steganography
 
 - 25 points: the audio is composed of 11 notes lasting 1 second each, and their frequency (=nb or periods) give an ASCII code
+- 75 points:
+    The file is a BMP in black and white, but when looking at the hex values, all the whites are either 0xff or 0xfe, so it looks like a LSB technique
+    (least significant bit). Getting the data to make sense if not trivial as the order of the bits is important: BMP encode information bottom-up and
+    in BGR, so the first and third axis must be flip for the resulting data to make sense (cf `steganography_75.py`).
+    With these right parameters, `file` reveals that in this configuration we obtain a new valid BMP file, but which does not look like anything.
+    However, by looking at the hex dump of this file and the BMP header format, we can see that the header is twice as long as normal, and there's a "FAKE"
+    string in a reserved spot.
+    By removing this fake header, we get a new BMP file with a correct header that gives us the flag when seen.
