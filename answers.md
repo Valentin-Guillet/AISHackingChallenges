@@ -81,4 +81,5 @@
 # Cryptography
 
 - 25 points: a simple skip cipher (take one letter every n letters)
-- 75 points: we get a sequence of bytes as input, which seems to correspond to a zip file, that decompresses into another format, which ...
+- 75 points: we get a sequence of bytes as input, which seems to correspond to a zip file, that decompresses into another format, etc.
+- 100 points: cf. python file
