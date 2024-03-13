@@ -85,3 +85,19 @@
 - 100 points: cf. python file
 - 150 points: WIP
 - 250 points: debugging the `encrypt_file` function in the `ransom` executable shows that it only applies a simple binary mapping to encrypt files that we can easily reverse
+
+
+# Input Validation
+
+- 50 points: simple SQL injection: enter `test'` to break and print the SQL request, we can then dump the database using a `OR 1=1 --` input
+- 75 points: simple XSS: the img URL input field gets loaded in the `src` attribute of the `<img>` object loaded, we can't use `<script>` tags,
+    but we can escape the `src` element and define a `onmouseover` event that alerts with the document cookies
+- 100 points:
+    Also an SQL injection that can dump the SQL request using `test'`. The selected column is `username` and we want the credit number column, so we must
+    perform a UNION attack: we UNION the table with itself while selecting the other column in the right part of the UNION.
+    However, the left and right part of the UNION must have the same number of columns, so we can't just `UNION SELECT * FROM table` as it has more than one column.
+    But to select the target column, we must know its name, and we don't have it here. Moreover, it seems that all the classic ways to get column names are deleted,
+    so we must select a column without having its name.
+    One way to do that is to first UNION the table with a fake table with enough columns, and then to use the name of these fake columns to select them.
+    The final input looks like that (the 4 has been found by trial and error):
+    `test' UNION SELECT "2" FROM (SELECT 1,2,3,4 UNION SELECT * FROM credit_cards WHERE username="name") --`
