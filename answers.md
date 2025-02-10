@@ -90,6 +90,12 @@
 # Exploitation
 
 - 15 points: simple stack overflow: the password overflows on the `authentication` variable, so with 13 characters as input its value is set to the ASCII code of the last char
+- 175 points:
+    The executable seems to wait for base64 inputs in order to converse with it, otherwise it only returns random useless messages.
+    By looking at the assembly, we can see that the executable can take a `--help` flag as input where it tells us that the base64 message will be treated
+    as a C struct. We can write a script that generate custom base64 messages with arbitrary long length: the bot then dumps all the stack when trying to parse the message.
+    We can then read the memory to get information, more specifically the command executed to run the `lonely_bot` binary, which includes a `--flag` argument.
+    (/!\ pass the input to the web interface, not to the local binary!)
 
 
 # Input Validation
