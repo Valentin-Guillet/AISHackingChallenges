@@ -57,12 +57,19 @@
     Once everything is set, this gives the complete password.
 
 - 500 points:
+    (
     The executable is completely stripped, so we can't break at main or start of libc. `strace` allows us to see that the executable makes a `read` syscall in
     order to get user input, and it's the 2 read call (first one is to get information about the process).
     So we can `catch syscall read` and ignore the 3 first hit on the breakpoint (it hits once when entering and once when exiting, so we ignore enter-exit of
     the first call and enter of the second, and we break when it exits).
     At this point, we just read user input. By carefully stepping in the assembly afterwards, we can find some classic functions call.
     In particular, we can find a function that seems to be `atoi` or equivalent as its outputs the integer value of our input in `%eax`.
+    )
+    => The binary is packed using UPX (found by googling for "This file is packed with" found at `strings ./debugme`).
+    It also has been obfuscated further, so we first need to repair it using [UPX Recovery Tool](https://github.com/NozomiNetworks/upx-recovery-tool), and then unpack it.
+    However, the resulting binary is still stripped and statically linked, and can't be easily reverse engineered.
+    There also seems to have a protection against tracing/debugging to disable.
+    This one proved too difficult for me, so I'm stopping here for now.
 
 
 # Steganography
