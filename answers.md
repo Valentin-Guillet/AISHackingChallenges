@@ -83,7 +83,7 @@
 - 25 points: a simple skip cipher (take one letter every n letters)
 - 75 points: we get a sequence of bytes as input, which seems to correspond to a zip file, that decompresses into another format, etc.
 - 100 points: cf. python file
-- 150 points: WIP
+- 150 points: use an Enigma cracker with settings given in the console page of the site (reflectors and plugs are given)
 - 250 points: debugging the `encrypt_file` function in the `ransom` executable shows that it only applies a simple binary mapping to encrypt files that we can easily reverse
 
 
