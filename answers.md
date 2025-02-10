@@ -87,6 +87,11 @@
 - 250 points: debugging the `encrypt_file` function in the `ransom` executable shows that it only applies a simple binary mapping to encrypt files that we can easily reverse
 
 
+# Exploitation
+
+- 15 points: simple stack overflow: the password overflows on the `authentication` variable, so with 13 characters as input its value is set to the ASCII code of the last char
+
+
 # Input Validation
 
 - 50 points: simple SQL injection: enter `test'` to break and print the SQL request, we can then dump the database using a `OR 1=1 --` input
